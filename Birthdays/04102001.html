@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale1.0" />
-        <link rel="stylesheet" href="..//CSS/BadCss.css">
-    </head>
-<body>
-    <p id = "BirthdayNote">Happy birthday!<br><br><br><br><br><br><br><br><br></p>
 
-    
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale1.0" />
+    <link rel="stylesheet" href="..//CSS/BadCss.css">
+</head>
+
+<body>
+    <p id="BirthdayNote">Happy birthday!<br><br><br><br><br><br><br></p>
+
+
 
     <script>
         var timeleft = "2days";
@@ -20,8 +22,8 @@
         var dotime;
 
         var d = new Date();
-        var bmonth = 4,bday = 10;
-        var monthL,dayL,minL,secL;
+        var bmonth = 4, bday = 10;
+        var monthL, dayL, hourL, minL, secL;
 
         window.onclick = ChangeColor;
         setInterval(SlowColorChange, 100);
@@ -48,43 +50,65 @@
             if (b >= 255) plusB = false;
             document.getElementsByTagName("BODY")[0].style.backgroundColor = 'rgb(' + r + ',' + g + ',' + b + ')';
         }
-        function UpdateTime(){
+        function UpdateTime() {
             var d = new Date();
-            monthL = bmonth - (d.getMonth()+1);
-            dayL = bday - d.getDate();
-            if(monthL<0){
-                monthL+=12;
-                if(dayL<0){
-                    dayL+=30;
+            monthL = bmonth - (d.getMonth() + 1);
+            dayL = bday - (d.getDate()+1);
+            if (monthL < 0) {
+                monthL += 12;
+                if (dayL < 0) {
+                    dayL += 30;
                     monthL--;
                 }
-            }else if(monthL==0){
-                if(dayL<0){
-                    dayL+=30;
-                    monthL+=11;
+            } else if (monthL == 0) {
+                if (dayL < 0) {
+                    dayL += 30;
+                    monthL += 11;
                 }
-            }else{
-                if(dayL<0){
-                    dayL+=30;
+            } else {
+                if (dayL < 0) {
+                    dayL += 30;
                     monthL--;
                 }
             }
             timeleft = "...in ";
-            if(monthL>1){
-                timeleft += monthL+ " months "
-            }else if(month == 1){
-                timeleft += "one month "
+            if (monthL > 1) {
+                timeleft += monthL + " months ";
+            } else if (month == 1) {
+                timeleft += "one month ";
             }
-            if(dayL>1){
-                timeleft += dayL+ " days!!"
-            }else if(dayL == 1){
-                timeleft += "one day "
+            if (dayL > 1) {
+                timeleft += dayL + " days ";
+            } else if (dayL == 1) {
+                timeleft += " one day ";
+            }
+            if (!(dayL == 0 && monthL == 0)) {
+                hourL = 24 - (d.getHours() + 1);
+                minL = 60 - (d.getMinutes() + 1);
+                secL = 60 - (d.getSeconds() + 1);
+                //timeleft += hourL + " hours " + minL + " minutes and " + secL + " seconds";
+                if (hourL > 1) {
+                    timeleft += hourL + " hours ";
+                } else if (hourL == 1) {
+                    timeleft += "1 hour ";
+                }
+                if (minL > 1) {
+                    timeleft += minL + " minutes ";
+                } else if (minL == 1) {
+                    timeleft += " 1 minute ";
+                }
+                timeleft += "and "
+                if(secL>1||secL==0){
+                    timeleft += secL + " seconds";
+                }else if(secL){
+                    timeleft += " 1 second";
+                }
             }
             document.getElementById('TellTime').innerHTML = timeleft;
             console.log("time");
         }
     </script>
-    <p id = "TellTime">timeleft</p>
+    <p id="TellTime">timeleft</p>
 </body>
 
 </html>
