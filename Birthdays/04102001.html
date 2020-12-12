@@ -1,26 +1,90 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale1.0" />
-    <link rel="stylesheet" href="CSS/Game, maybe.css">
-</head>
-
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale1.0" />
+        <link rel="stylesheet" href="..//CSS/BadCss.css">
+    </head>
 <body>
-    <p>Happy birthday!</p>
+    <p id = "BirthdayNote">Happy birthday!<br>.<br><br>..<br><br><br>...<br><br><br></p>
+
+    
+
     <script>
-        window.onclick = myFunction;
-        
-        function myFunction() {
-            var r;
-            var g;
-            var b;
-            r = Math.floor(Math.random()*256);
-            g = Math.floor(Math.random()*256);
-            b = Math.floor(Math.random()*256);
-          document.getElementsByTagName("BODY")[0].style.backgroundColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+        var timeleft = "2days";
+        var r;
+        var g;
+        var b;
+        var plusR = false;
+        var plusG = true;
+        var plusB = true;
+        var dotime;
+
+        var d = new Date();
+        var bmonth = 4,bday = 10;
+        var monthL,dayL,minL,secL;
+
+        window.onclick = ChangeColor;
+        setInterval(SlowColorChange, 100);
+        dotime = setInterval(UpdateTime, 1000);
+        function ChangeColor() {
+            r = Math.floor(Math.random() * 256);
+            g = Math.floor(Math.random() * 256);
+            b = Math.floor(Math.random() * 256);
+            document.getElementsByTagName("BODY")[0].style.backgroundColor = 'rgb(' + r + ',' + g + ',' + b + ')';
         }
-        </script>
+        function SlowColorChange() {
+            if (plusR) r++;
+            else r--;
+            if (plusG) g++;
+            else g--;
+            if (plusB) b++;
+            else b--;
+
+            if (r <= 0) plusR = true;
+            if (r >= 255) plusR = false;
+            if (g <= 0) plusG = true;
+            if (g >= 255) plusG = false;
+            if (b <= 0) plusB = true;
+            if (b >= 255) plusB = false;
+            document.getElementsByTagName("BODY")[0].style.backgroundColor = 'rgb(' + r + ',' + g + ',' + b + ')';
+        }
+        function UpdateTime(){
+            var d = new Date();
+            monthL = bmonth - (d.getMonth()+1);
+            dayL = bday - d.getDate();
+            if(monthL<0){
+                monthL+=12;
+                if(dayL<0){
+                    dayL+=30;
+                    monthL--;
+                }
+            }else if(monthL==0){
+                if(dayL<0){
+                    dayL+=30;
+                    monthL+=11;
+                }
+            }else{
+                if(dayL<0){
+                    dayL+=30;
+                    monthL--;
+                }
+            }
+            timeleft = "in ";
+            if(monthL>1){
+                timeleft += monthL+ " months "
+            }else if(month == 1){
+                timeleft += "one month "
+            }
+            if(dayL>1){
+                timeleft += dayL+ " days "
+            }else if(dayL == 1){
+                timeleft += "one day "
+            }
+            document.getElementById('TellTime').innerHTML = timeleft;
+            console.log("time");
+        }
+    </script>
+    <p id = "TellTime">timeleft</p>
 </body>
 
 </html>

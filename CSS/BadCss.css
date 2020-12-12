@@ -10,3 +10,10 @@ canvas{
 body {
     background-color: lightblue;
   }
+p{
+    font-family: 'Brush Script MT', cursive;
+    font-size: 45px;
+}
+body {
+    background-image: url(..//Images/SA2.png);
+}
