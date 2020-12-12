@@ -62,9 +62,6 @@
                         this.x += Math.cos((Aangle - 90) * Math.PI / 180) * speed;
                         this.y += Math.sin((Aangle - 90) * Math.PI / 180) * speed;
                         this.dist = Math.sqrt(Math.pow((mouse.x - this.x), 2) + Math.pow((mouse.y - this.y), 2));
-
-
-
                     }
                     this.movement1 = function () {
                         this.comfort = 15;
@@ -122,10 +119,8 @@
 
             </script>
 
-
             <label for="fname">Enter Birthday(MMDDYYYY):</label>
             <br><input type="number" id="fname" name="fname"><br>
-
 
             <button onclick="getPage()">Try it</button>
             <script>
@@ -149,7 +144,7 @@
                             var data = "Birthdays/";
                             data += x.value + ".html";
                             console.log(data);
-                            location.replace(data);
+                            location.href = data;
                         }
                     }
                 }
