@@ -16,4 +16,9 @@ p{
 }
 body {
     background-image: url(..//Images/SA2.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position-y: bottom;
+    background-position-x: right;
 }

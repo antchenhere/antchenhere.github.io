@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body{
+                background-color: #cae0a3;
+            }
+            canvas{
+                padding-left: 0;
+                padding-right: 0;
+                margin-left: auto;
+                margin-right: auto;
+                border: 10px ridge #cef40b;
+                background-color: #bbbbbb;
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>
+            ahere?
+        </h1>
+        <script>
+            var myGameArea = {
+                    canvas: document.createElement("canvas"),
+                    start: function () {
+                        this.canvas.width = 500;
+                        this.canvas.height = 500;
+                        this.context = this.canvas.getContext("2d");
+                        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+                        console.log("I ran");
+                    },
+                    clear: function () {
+                        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                    }
+                }
+                myGameArea.start();
+                
+        </script>
+        <h1>
+            amhere?
+        </h1>
+    </body>
+</html>
