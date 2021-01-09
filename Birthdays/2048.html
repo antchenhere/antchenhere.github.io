@@ -21,6 +21,13 @@
             ahere?
         </h1>
         <script>
+            var grid = [
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,0,0,0],
+                [0,0,0,1]
+            ];
+
             var myGameArea = {
                     canvas: document.createElement("canvas"),
                     start: function () {
@@ -32,10 +39,19 @@
                     },
                     clear: function () {
                         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                    },
+                    drawSquares: function(){
+                        this.context.fillStyle = "#eeeeee";
+                        for(var i = 0; i < 4; i++){
+                            for(var j = 0; j < 4; j++){
+                                if(grid[i][j]==0)
+                                this.context.fillRect(j*(this.canvas.width/4)+2,i*(this.canvas.width/4)+2,121,121);
+                            }
+                        }
                     }
                 }
                 myGameArea.start();
-                
+                myGameArea.drawSquares();
         </script>
         <h1>
             amhere?
