@@ -46,6 +46,10 @@
                             for(var j = 0; j < 4; j++){
                                 if(grid[i][j]==0)
                                 this.context.fillRect(j*(this.canvas.width/4)+2,i*(this.canvas.width/4)+2,121,121);
+                                else{
+                                    this.context.font = "60px Arial";
+                                    this.context.fillText(grid[i][j],j*(this.canvas.width/4)+2+40,i*(this.canvas.width/4)+2+80);
+                                }
                             }
                         }
                     }
