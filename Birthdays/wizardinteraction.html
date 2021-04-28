@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale1.0" />
+    <link rel="stylesheet" href="..//CSS/Game, CSS.css">
+    <img id="wiz" src="..//Images/Wiz.png" alt="wiz" width="2" height="2">
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<body onload="Play()">
+    <h2>This is my game. This is a bad game, but this is MY bad game<h2>
+            <script>
+                var numbers = [4102001, 08232002, 09242001,2048];
+
+                var mouse = {
+                    x: 0,
+                    y: 0
+                }
+                function Play() {
+                    myGameArea.start();
+                    dude = new wiz(200, 200, 16, 16)
+                }
+                function wiz(x, y, width, height) {
+                    this.x = x;
+                    this.y = y;
+                    this.width = width;
+                    this.height = height;
+                    this.dist = 0;
+                    this.interaction = 0;
+                    this.close = false;
+                    this.comfort = 15;
+                    this.follow = function (speed) {
+                        Aangle = Math.atan((mouse.y - this.y) / Math.abs(mouse.x - this.x)) * 180 / Math.PI + 90;
+                        if ((mouse.x - this.x) < 0) Aangle = -Aangle;
+                        if (this.dist < this.comfort) {
+                            if (Aangle > 180) Aangle -= 180;
+                            else Aangle += 180;
+
+                        } else {
+                            close = false;
+                        }
+                        if (!close && this.dist < 15) {
+                            this.interaction++;
+                            console.log("interact");
+                            switch ((this.interaction / 2) % 3) {
+                                case 0:
+                                    this.movement1();
+                                    break;
+                                case 1:
+                                    this.movement2();
+                                    break;
+                                case 2:
+                                    this.movement3();
+                                    this.interaction--;
+                                    break;
+                            }
+                            close = true;
+                        }
+                        if (this.dist > 15) close = false;
+
+                        this.x += Math.cos((Aangle - 90) * Math.PI / 180) * speed;
+                        this.y += Math.sin((Aangle - 90) * Math.PI / 180) * speed;
+                        this.dist = Math.sqrt(Math.pow((mouse.x - this.x), 2) + Math.pow((mouse.y - this.y), 2));
+                    }
+                    this.movement1 = function () {
+                        this.comfort = 15;
+                        console.log("ah move1");
+                    }
+                    this.movement2 = function () {
+                        this.comfort = 80;
+                        console.log("ah move2");
+                    }
+                    this.movement3 = function () {
+                        this.comfort = 15;
+                        this.x = Math.floor(Math.random() * myGameArea.canvas.width);
+                        this.y = Math.floor(Math.random() * myGameArea.canvas.height);
+                    }
+                    this.update = function () {
+                        this.dist = Math.sqrt(Math.pow((mouse.x - this.x), 2) + Math.pow((mouse.y - this.y), 2));
+                        ctx = myGameArea.context;
+                        var img = document.getElementById("wiz");
+                        if (this.dist >= 100 || this.dist < this.comfort) {
+                            this.follow(2, mouse);
+                        }
+                        ctx.drawImage(img, this.x - 8, this.y - 8, this.width, this.height);
+                    }
+
+                }
+                var myGameArea = {
+                    canvas: document.createElement("canvas"),
+                    start: function () {
+                        this.canvas.width = 1000;
+                        this.canvas.height = 500;
+                        this.context = this.canvas.getContext("2d");
+                        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+                        this.interval = setInterval(draw, 20);
+                    },
+                    clear: function () {
+                        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                    }
+                }
+                function getMousePosition(canvas, event) {
+                    let rect = canvas.getBoundingClientRect();
+                    let x = event.clientX - rect.left;
+                    let y = event.clientY - rect.top;
+                    //console.log("Coordinate x: " + x,  
+                    //"Coordinate y: " + y); 
+                    mouse.x = x;
+                    mouse.y = y;
+                }
+                myGameArea.canvas.addEventListener("mousemove", function (e) {
+                    getMousePosition(myGameArea.canvas, e);
+                });
+                function draw() {
+                    myGameArea.clear();
+                    dude.update();
+                }
+
+            </script>
+
+            <label for="fname">Enter Birthday(MMDDYYYY):</label>
+            <br><input type="number" id="fname" name="fname"><br>
+
+            <button onclick="getPage()">Try it</button>
+            <script>
+
+                var found = false;
+                function getPage() {
+                    var x = document.getElementById("fname");
+                    if (x.value < 101 || x.value > 12320000) {
+                        window.alert("Thats an invalid entry");
+                    } else {
+                        for (var i = 0; i < numbers.length; i++) {
+                            console.log(numbers[i]);
+                            if (x.value == numbers[i]) {
+                                console.log("found")
+                                found = true;
+                            }
+                        }
+                        if (!found) {
+                            window.alert("Sorry!!\nThis page doesn't exist yet!\nI'm working on it...\n\n\nmaybe?");
+                        } else {
+                            var data = "Birthdays/";
+                            data += x.value + ".html";
+                            console.log(data);
+                            location.href = data;
+                        }
+                    }
+                }
+                const node = document.getElementById("fname");
+                node.addEventListener("keyup", function (event) {
+                    if (event.key === "Enter") {
+                        getPage();
+                    }
+                });
+            </script>
+
+</body>
+
+</html>

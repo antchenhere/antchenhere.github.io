@@ -2,159 +2,142 @@
 <html>
 
 <head>
+    <title>Antony Chen</title>
     <meta name="viewport" content="width=device-width, initial-scale1.0" />
-    <link rel="stylesheet" href="CSS/Game, CSS.css">
-    <img id="wiz" src="Images/Wiz.png" alt="wiz" width="2" height="2">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inconsolata:wght@600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="CSS/profile1.css">
+
+
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-<body onload="Play()">
-    <h2>This is my game. This is a bad game, but this is MY bad game<h2>
-            <script>
-                var numbers = [4102001, 08232002, 09242001,2048];
+<body>
+    <section class="s1">
+        <div class="main-container">
+            <div class="greeting-wrapper">
+                <h1>Hello, I'm Antony Chen</h1>
+            </div>
+            <div class="intro-wrapper">
+                <div class="nav-wrapper">
+                    <div class="dots-wrapper">
+                        <div class="browser-dot"></div>
+                    </div>
+                    <ul id="navigation">
+                        <li><a href="#">Contact</a></li>
+                    </ul>
 
-                var mouse = {
-                    x: 0,
-                    y: 0
-                }
-                function Play() {
-                    myGameArea.start();
-                    dude = new wiz(200, 200, 16, 16)
-                }
-                function wiz(x, y, width, height) {
-                    this.x = x;
-                    this.y = y;
-                    this.width = width;
-                    this.height = height;
-                    this.dist = 0;
-                    this.interaction = 0;
-                    this.close = false;
-                    this.comfort = 15;
-                    this.follow = function (speed) {
-                        Aangle = Math.atan((mouse.y - this.y) / Math.abs(mouse.x - this.x)) * 180 / Math.PI + 90;
-                        if ((mouse.x - this.x) < 0) Aangle = -Aangle;
-                        if (this.dist < this.comfort) {
-                            if (Aangle > 180) Aangle -= 180;
-                            else Aangle += 180;
+                </div>
+                <div class="left-column">
+                    <img id="profile-pic" src="Images/publix profile2.0.jpg">
+                    <h5 style="text-align: center; line-height: 0;"> This is me</h5>
+                </div>
+                <div class="right-column">
+                    <div id="preview-shadow">
+                        <div id="preview">
+                            <div id="corner-tl" class="corner"></div>
+                            <div id="corner-tr" class="corner"></div>
+                            <h3>Welcome to my site</h3>
+                            <p>I'm a sophomore student persuring a Computer Science degree at the University of
+                                Florida.</p>
+                            <div id="corner-bl" class="corner"></div>
+                            <div id="corner-br" class="corner"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                        } else {
-                            close = false;
-                        }
-                        if (!close && this.dist < 15) {
-                            this.interaction++;
-                            console.log("interact");
-                            switch ((this.interaction / 2) % 3) {
-                                case 0:
-                                    this.movement1();
-                                    break;
-                                case 1:
-                                    this.movement2();
-                                    break;
-                                case 2:
-                                    this.movement3();
-                                    this.interaction--;
-                                    break;
-                            }
-                            close = true;
-                        }
-                        if (this.dist > 15) close = false;
+        </div>
+    </section>
 
-                        this.x += Math.cos((Aangle - 90) * Math.PI / 180) * speed;
-                        this.y += Math.sin((Aangle - 90) * Math.PI / 180) * speed;
-                        this.dist = Math.sqrt(Math.pow((mouse.x - this.x), 2) + Math.pow((mouse.y - this.y), 2));
-                    }
-                    this.movement1 = function () {
-                        this.comfort = 15;
-                        console.log("ah move1");
-                    }
-                    this.movement2 = function () {
-                        this.comfort = 80;
-                        console.log("ah move2");
-                    }
-                    this.movement3 = function () {
-                        this.comfort = 15;
-                        this.x = Math.floor(Math.random() * myGameArea.canvas.width);
-                        this.y = Math.floor(Math.random() * myGameArea.canvas.height);
-                    }
-                    this.update = function () {
-                        this.dist = Math.sqrt(Math.pow((mouse.x - this.x), 2) + Math.pow((mouse.y - this.y), 2));
-                        ctx = myGameArea.context;
-                        var img = document.getElementById("wiz");
-                        if (this.dist >= 100 || this.dist < this.comfort) {
-                            this.follow(2, mouse);
-                        }
-                        ctx.drawImage(img, this.x - 8, this.y - 8, this.width, this.height);
-                    }
+    <section class="s2">
+        <div class="main-container">
+            <div class="main-container">
+                <div class="about-wrapper">
+                    <div class="about-me">
+                        <h4>More About me</h4>
+                        <p>I kinda like coding...</p>
+                        <p>So yeah. Thats about it</p>
 
-                }
-                var myGameArea = {
-                    canvas: document.createElement("canvas"),
-                    start: function () {
-                        this.canvas.width = 1000;
-                        this.canvas.height = 500;
-                        this.context = this.canvas.getContext("2d");
-                        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-                        this.interval = setInterval(draw, 20);
-                    },
-                    clear: function () {
-                        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                    }
-                }
-                function getMousePosition(canvas, event) {
-                    let rect = canvas.getBoundingClientRect();
-                    let x = event.clientX - rect.left;
-                    let y = event.clientY - rect.top;
-                    //console.log("Coordinate x: " + x,  
-                    //"Coordinate y: " + y); 
-                    mouse.x = x;
-                    mouse.y = y;
-                }
-                myGameArea.canvas.addEventListener("mousemove", function (e) {
-                    getMousePosition(myGameArea.canvas, e);
-                });
-                function draw() {
-                    myGameArea.clear();
-                    dude.update();
-                }
+                        <hr>
 
-            </script>
+                        <h4>Comfort Zone</h4>
 
-            <label for="fname">Enter Birthday(MMDDYYYY):</label>
-            <br><input type="number" id="fname" name="fname"><br>
+                        <p>Just a college student trying out somethings<br>Here's my resume: <a target="_blank"
+                                href="MoreFiles/Resume.pdf">Download Resume</a></p>
+                        <div id="skills">
+                            <ul>
+                                <li>Java</li>
+                                <li>JavaScript</li>
+                            </ul>
 
-            <button onclick="getPage()">Try it</button>
-            <script>
+                            <ul>
+                                <li>PhotoShop</li>
+                                <li>C++</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <h3>My Linkedin</h3>
+                        <a target="_blank" href = "https://www.linkedin.com/in/antony-chen-81958215b/">Linkedin: Antony Chen</a>
+                    </div>
 
-                var found = false;
-                function getPage() {
-                    var x = document.getElementById("fname");
-                    if (x.value < 101 || x.value > 12320000) {
-                        window.alert("Thats an invalid entry");
-                    } else {
-                        for (var i = 0; i < numbers.length; i++) {
-                            console.log(numbers[i]);
-                            if (x.value == numbers[i]) {
-                                console.log("found")
-                                found = true;
-                            }
-                        }
-                        if (!found) {
-                            window.alert("Sorry!!\nThis page doesn't exist yet!\nI'm working on it...\n\n\nmaybe?");
-                        } else {
-                            var data = "Birthdays/";
-                            data += x.value + ".html";
-                            console.log(data);
-                            location.href = data;
-                        }
-                    }
-                }
-                const node = document.getElementById("fname");
-                node.addEventListener("keyup", function (event) {
-                    if (event.key === "Enter") {
-                        getPage();
-                    }
-                });
-            </script>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="s1">
+        <div class="main-container">
+            <h3 style= "text-align: center;">Projects (Work in progress)</h3>
+            <div class = "post-wrapper">
+                <div class="project_wiz">
+                    <img class = "thumbnail" src="Images/wis_demo.PNG">
+                    <div class = "post-preview">
+                        <h6 class = "post-title">Wizard Demo</h6>
+                        <p class = "post-intro"> Just experimenting with Java Script</p>
+                    </div>
+                </div>
+                <div class="project_wiz">
+                    <img class = "thumbnail" src="Images/TBirth_Demo.PNG">
+                    <div class = "post-preview">
+                        <h6 class = "post-title">Colors and Birthdays</h6>
+                        <p class = "post-intro"> Made for a friend, Experimenting with colors</p>
+                    </div>
+                </div>
+                <div class="project_wiz">
+                    <img class = "thumbnail" src="Images/2048_demo.PNG">
+                    <div class = "post-preview">
+                        <h6 class = "post-title">Recreating 2048</h6>
+                        <p class = "post-intro">This was for practice</p>
+                    </div>
+                </div>
+                <div></div>
+                <div></div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="s2">
+        <div class="main-container">
+            Contact
+        </div>
+    </section>
+
+    <div id="wrapper">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+    </div>
 
 </body>
 
