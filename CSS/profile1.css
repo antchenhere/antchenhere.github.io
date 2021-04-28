@@ -230,4 +230,11 @@ object-fit: cover;
     .right-column{
         justify-content: center;
     }
+    .post-wrapper{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .post-preview{
+        padding-bottom: 2em;
+    }
 }
