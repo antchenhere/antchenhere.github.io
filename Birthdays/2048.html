@@ -82,11 +82,19 @@
                             grid[i][j]=0;
                             action = true;
                             j=0;
-                        }else if(grid[i][j]!=0 && grid[i][j-1] == grid[i][j]){
+                        }
+                    }
+                }
+                for (var i = 0; i < 4; i++) {
+                    for (var j = 1; j < 4; j++) {
+                        if(grid[i][j]!=0 && grid[i][j-1] == grid[i][j]){
                             grid[i][j-1] += grid[i][j];
-                            grid[i][j]=0;
+                            for(var a = j; j <= 2; j++){
+                                grid[i][a] = grid[i][a+1];
+                            }
+                            grid[i][3]=0;
                             action = true;
-                            j=0;
+                            j--;
                         }
 
                     }
@@ -106,11 +114,19 @@
                             grid[i][j]=0;
                             action = true;
                             i=0;
-                        }else if(grid[i][j]!=0 && grid[i-1][j] == grid[i][j]){
+                        }
+                    }
+                }
+                for (var j = 0; j < 4; j++) {
+                    for (var i = 1; i < 4; i++) {
+                        if(grid[i][j]!=0 && grid[i-1][j] == grid[i][j]){
                             grid[i-1][j] += grid[i][j];
-                            grid[i][j]=0;
+                            for(var a  = i; a<=2; a++){
+                                grid[a][j] = grid[a+1][j];
+                            }
+                            grid[3][j] =0;
                             action = true;
-                            i=0;
+                            i--;
                         }
 
                     }
@@ -130,11 +146,18 @@
                             grid[i][j]=0;
                             action = true;
                             j=3;
-                        }else if(grid[i][j]!=0 && grid[i][j+1] == grid[i][j]){
+                        }
+                    }
+                }for (var i = 0; i < 4; i++) {
+                    for (var j = 2; j >= 0; j--) {
+                        if(grid[i][j]!=0 && grid[i][j+1] == grid[i][j]){
                             grid[i][j+1] += grid[i][j];
-                            grid[i][j]=0;
+                            for(var a  = i; a>=1; a--){
+                                grid[i][a] = grid[i][a-1];
+                            }
+                            grid[i][0]=0;
                             action = true;
-                            j=3;
+                            j++;
                         }
 
                     }
@@ -154,11 +177,19 @@
                             grid[i][j]=0;
                             action = true;
                             i=3;
-                        }else if(grid[i][j]!=0 && grid[i+1][j] == grid[i][j]){
+                        }
+                    }
+                }
+                for (var j = 0; j < 4; j++) {
+                    for (var i = 2; i >= 0; i--) {
+                        if(grid[i][j]!=0 && grid[i+1][j] == grid[i][j]){
                             grid[i+1][j] += grid[i][j];
-                            grid[i][j]=0;
+                            for(var a  = i; a>=1; a--){
+                                grid[a][j] = grid[a-1][j];
+                            }
+                            grid[0][j] =0;
                             action = true;
-                            i=3;
+                            i++;
                         }
 
                     }
