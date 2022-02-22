@@ -152,7 +152,7 @@
                     for (var j = 2; j >= 0; j--) {
                         if(grid[i][j]!=0 && grid[i][j+1] == grid[i][j]){
                             grid[i][j+1] += grid[i][j];
-                            for(var a  = i; a>=1; a--){
+                            for(var a  = j; a>=1; a--){
                                 grid[i][a] = grid[i][a-1];
                             }
                             grid[i][0]=0;
@@ -235,6 +235,7 @@
     <h1>
         amhere?
     </h1>
+    
 </body>
 
 </html>
